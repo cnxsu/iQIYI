@@ -33,19 +33,17 @@ jobs:
         env:
           cookie: ${{ secrets.GLADOS_COOKIE }}
           is_ServerChan_push: 0   # 0-不推送消息，1-开启Server酱消息推送
-          SendKey: ${{ secrets.SENDKEY }}
+          SendKey: ${{ secrets.PUSH_KEY }}
           is_PushPlus_push: 1   # 0-不推送消息，1-开启pushplus消息推送
-          token: ${{ secrets.TOKEN }}
-          is_Qmsg_push: 1   # 0-不推送消息，1-开启Qmsg消息推送
-          key: ${{ secrets.KEY }}
+          token: ${{ secrets.PUSH_PLUS_TOKEN }}
+          is_Qmsg_push: 1       # 0-不推送消息，1-开启Qmsg消息推送
+          key: ${{ secrets.QMSG_KEY }}
+          appToken: ${{ secrets.WX_PUSHER_APP_TOKEN }}
+          uid: ${{ secrets.WX_PUSHER_UID }}
         run: |
-          output=$(python ./GLaDOS/main.py 2>&1)
-          echo "$output" >> new_run.log
-          cat run.log >> new_run.log
-          mv new_run.log run.log
-          rm GLaDOS/__pycache__/Check.cpython-310.pyc
-          rm GLaDOS/__pycache__/push.cpython-310.pyc
-          rm GLaDOS/__pycache__/logger.cpython-310.pyc
+          python ./GLaDOS/main.py 2>&1 | tee -a new_run.log
+          cat run.log >> new_run.log && mv new_run.log run.log
+          rm GLaDOS/__pycache__/Check.cpython-310.pyc GLaDOS/__pycache__/push.cpython-310.pyc GLaDOS/__pycache__/logger.cpython-310.pyc
 
       - name: Push log
         uses: stefanzweifel/git-auto-commit-action@v5
