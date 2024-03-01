@@ -1,17 +1,22 @@
 from os import environ
 from logger import logger
 from Check import CheckIn
-from push import send_msg_ServerChan, send_msg_PushPlus, send_msg_Qmsg, send_msg_WxPusher
+from push import (
+    send_msg_ServerChan, send_msg_Qmsg, send_msg_PushPlus,
+    send_msg_PushPlusWebhook, send_msg_WxPusher
+)
 
 def main():
     # 从环境变量中获取配置信息
     ck = environ.get("cookie")
     SendKey = environ.get("SendKey")
     is_ServerChan_push = int(environ.get("is_ServerChan_push", 0))
-    token = environ.get("token")
-    is_PushPlus_push = int(environ.get("is_PushPlus_push", 0))
     key = environ.get("key")
     is_Qmsg_push = int(environ.get("is_Qmsg_push", 0))
+    token = environ.get("token")
+    is_PushPlus_push = int(environ.get("is_PushPlus_push", 0))
+    channel = environ.get("channel")
+    webhook = environ.get("webhook")
     appToken = environ.get("appToken")
     uids = environ.get("uid")
 
@@ -38,15 +43,18 @@ def main():
         if is_ServerChan_push and SendKey:
             rsp1 = send_msg_ServerChan(SendKey, title, msg)
             logger.info(rsp1)
-        if is_PushPlus_push and token:
-            rsp2 = send_msg_PushPlus(token, title, msg)
-            logger.info(rsp2)
         if is_Qmsg_push and key:
-            rsp3 = send_msg_Qmsg(key, msg)
+            rsp2 = send_msg_Qmsg(key, msg)
+            logger.info(rsp2)
+        if is_PushPlus_push and token:
+            rsp3 = send_msg_PushPlus(token, title, msg)
             logger.info(rsp3)
-        if appToken and uids:
-            rsp4 = send_msg_WxPusher(appToken, uids, title, msg)
+        if token and channel and webhook:
+            rsp4 = send_msg_PushPlusWebhook(token, channel, webhook, title, msg)
             logger.info(rsp4)
+        if appToken and uids:
+            rsp5 = send_msg_WxPusher(appToken, uids, title, msg)
+            logger.info(rsp5)
 
 if __name__ == "__main__":
     main()

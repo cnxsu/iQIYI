@@ -9,10 +9,7 @@ ORIGIN = "https://glados.rocks"
 UA = UserAgent()
 
 def CheckIn(cookie):
-    useragent = get_random_user_agent()
-    payload = {
-        'token': 'glados.one'
-    }
+    useragent = UA.random
     headers = {
         'cookie': cookie,
         'referer': REFERER,
@@ -21,7 +18,7 @@ def CheckIn(cookie):
         'content-type': 'application/json;charset=UTF-8'
     }
 
-    checkin = requests.post(URL, headers=headers, json=payload)
+    checkin = requests.post(URL, headers=headers, json={'token': 'glados.one'})
     state = requests.get(URL2, headers=headers)
 
     mess = checkin.json()['message']
@@ -32,7 +29,3 @@ def CheckIn(cookie):
     checkin.close()
     state.close()
     return f'{mess}，剩余{days}天', msg
-
-def get_random_user_agent():
-    random_user_agent = UA.random
-    return random_user_agent
