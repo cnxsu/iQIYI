@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - name: 拉取代码
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        uses: actions/checkout@v4
 
       - name: Setup timezone
         uses: zcong1993/setup-timezone@master
@@ -36,6 +36,8 @@ jobs:
           SendKey: ${{ secrets.PUSH_KEY }}
           is_PushPlus_push: 1   # 0-不推送消息，1-开启pushplus消息推送
           token: ${{ secrets.PUSH_PLUS_TOKEN }}
+          channel: ${{ secrets.PUSHPLUSCHANNEL }}
+          webhook: ${{ secrets.PUSHPLUSWEBHOOK }}
           is_Qmsg_push: 1       # 0-不推送消息，1-开启Qmsg消息推送
           key: ${{ secrets.QMSG_KEY }}
           appToken: ${{ secrets.WX_PUSHER_APP_TOKEN }}
