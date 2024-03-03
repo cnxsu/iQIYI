@@ -1,3 +1,32 @@
+2024-03-03 09:00:03,691 [INFO]: GLaDOS 签到成功！
+2024-03-03 09:00:03,691 [INFO]: checkin: 200 | state: 200
+2024-03-03 09:00:03,691 [INFO]: Checkin Repeats! Please Try Tomorrow
+2024-03-03 09:00:03,691 [INFO]: 剩余天数：383天
+2024-03-03 09:00:03,691 [INFO]: ========================================
+2024-03-03 09:00:03,691 [INFO]: Qmsg: 开始推送消息！
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/requests/models.py", line 971, in json
+    return complexjson.loads(self.text, **kwargs)
+  File "/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/work/iQIYI/iQIYI/./GLaDOS/main.py", line 60, in <module>
+    main()
+  File "/home/runner/work/iQIYI/iQIYI/./GLaDOS/main.py", line 47, in main
+    rsp2 = send_msg_Qmsg(key, msg)
+  File "/home/runner/work/iQIYI/iQIYI/GLaDOS/push.py", line 112, in send_msg_Qmsg
+    rsp = requests.get(url=url, params=params).json()
+  File "/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/requests/models.py", line 975, in json
+    raise RequestsJSONDecodeError(e.msg, e.doc, e.pos)
+requests.exceptions.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
 2024-03-03 00:15:12,449 [INFO]: GLaDOS 签到成功！
 2024-03-03 00:15:12,450 [INFO]: checkin: 200 | state: 200
 2024-03-03 00:15:12,450 [INFO]: Checkin! Got 7 Points
