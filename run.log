@@ -1,3 +1,66 @@
+2024-06-03 09:04:29,660 [INFO]: GLaDOS 签到成功！
+2024-06-03 09:04:29,661 [INFO]: checkin: 200 | state: 200
+2024-06-03 09:04:29,661 [INFO]: Checkin Repeats! Please Try Tomorrow
+2024-06-03 09:04:29,661 [INFO]: 剩余天数：353天
+2024-06-03 09:04:29,661 [INFO]: ========================================
+2024-06-03 09:04:29,661 [INFO]: Qmsg: 开始推送消息！
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/socket.py", line 955, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name or service not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages/urllib3/connectionpool.py", line 793, in urlopen
+    response = self._make_request(
+  File "/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages/urllib3/connectionpool.py", line 491, in _make_request
+    raise new_e
+  File "/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages/urllib3/connectionpool.py", line 467, in _make_request
+    self._validate_conn(conn)
+  File "/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages/urllib3/connectionpool.py", line 1099, in _validate_conn
+    conn.connect()
+  File "/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages/urllib3/connection.py", line 616, in connect
+    self.sock = sock = self._new_conn()
+  File "/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages/urllib3/connection.py", line 205, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x7fd10fbe8c40>: Failed to resolve 'qmsg.zendee.cn' ([Errno -2] Name or service not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages/urllib3/connectionpool.py", line 847, in urlopen
+    retries = retries.increment(
+  File "/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages/urllib3/util/retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='qmsg.zendee.cn', port=443): Max retries exceeded with url: /send/dbcf06cea1faa806da1f9e852043e1f9?msg=checkin%3A+200+%7C+state%3A+200%0ACheckin+Repeats%21+Please+Try+Tomorrow%0A%E5%89%A9%E4%BD%99%E5%A4%A9%E6%95%B0%EF%BC%9A353%E5%A4%A9 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7fd10fbe8c40>: Failed to resolve 'qmsg.zendee.cn' ([Errno -2] Name or service not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/work/iQIYI/iQIYI/./GLaDOS/main.py", line 60, in <module>
+    main()
+  File "/home/runner/work/iQIYI/iQIYI/./GLaDOS/main.py", line 47, in main
+    rsp2 = send_msg_Qmsg(key, msg)
+  File "/home/runner/work/iQIYI/iQIYI/GLaDOS/push.py", line 112, in send_msg_Qmsg
+    rsp = requests.get(url=url, params=params).json()
+  File "/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='qmsg.zendee.cn', port=443): Max retries exceeded with url: /send/dbcf06cea1faa806da1f9e852043e1f9?msg=checkin%3A+200+%7C+state%3A+200%0ACheckin+Repeats%21+Please+Try+Tomorrow%0A%E5%89%A9%E4%BD%99%E5%A4%A9%E6%95%B0%EF%BC%9A353%E5%A4%A9 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7fd10fbe8c40>: Failed to resolve 'qmsg.zendee.cn' ([Errno -2] Name or service not known)"))
 2024-06-03 00:16:21,506 [INFO]: GLaDOS 签到成功！
 2024-06-03 00:16:21,506 [INFO]: checkin: 200 | state: 200
 2024-06-03 00:16:21,507 [INFO]: Checkin! Got 6 Points
